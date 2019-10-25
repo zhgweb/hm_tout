@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import App from './App.vue'
-// 引入element-ui
+// 引入element-ui 框架
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-// ElementUI 是一个插件  集成了很多组件
-Vue.use(ElementUI) // 全局使用
+// 导入 vue-router
+import router from '@/router'
+Vue.use(ElementUI)
 Vue.config.productionTip = false
 // 根实例
 new Vue({
+  router, // 挂载
   render: h => h(App)
 }).$mount('#app')
 // main.js的作用
