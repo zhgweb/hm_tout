@@ -5,6 +5,12 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 // 导入 vue-router
 import router from '@/router'
+// 导入 axios
+import axios from '@/api'
+// 往vue的原型对象里面加一个$http方法
+// 全局下使用axios
+Vue.prototype.$http = axios
+// 全局下使用 element-ui 框架
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 // 根实例
