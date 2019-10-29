@@ -13,7 +13,7 @@
         active-text-color="#ffd04b"
         :collapse="!isOpen"
         :collapse-transition="false"
-        router="true"
+        router
       >
         <el-menu-item index="/">
           <i class="el-icon-s-home"></i>
@@ -58,15 +58,15 @@
         <span class="text">江苏传智播客科技教育有限公司</span>
         <!-- 下拉菜单组件 -->
         <!-- <div style="float-right"> -->
-        <el-dropdown class="dropdown">
-          <span class="el-dropdown-link userName">
-            <img class="headIcon" src="../../assets/avatar.jpg" alt />
-            用户名
+        <el-dropdown class="dropdown" @command="setoutClick">
+          <span class="el-dropdown-link">
+            <img class="headIcon" :src="photo" alt />
+            <span class="userName">{{name}}</span>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-unlock">退出登录</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-setting" command="setting">个人设置</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-unlock" command="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
         <!-- </div> -->
@@ -81,18 +81,41 @@
 </template>
 
 <script>
+import local from '@/utils/local'
 export default {
   data () {
     return {
       // 是不是展开的
-      isOpen: true
+      isOpen: true,
+      // 头像
+      photo: '',
+      // 用户名
+      name: ''
     }
   },
   methods: {
     toggleMenu () {
       // 切换侧边栏  展开与收起
       this.isOpen = !this.isOpen
+    },
+    setting () {
+      this.$router.push('/setting')
+    },
+    logout () {
+      // 先清除 在跳转
+      local.delUser()
+      this.$router.push('/login')
+    },
+    setoutClick (command) {
+      this[command]()
+      // debugger
     }
+  },
+  // 一进页面就获取用户信息
+  created () {
+    const user = local.getUser() || {}
+    this.photo = user.photo
+    this.name = user.name
   }
 }
 </script>

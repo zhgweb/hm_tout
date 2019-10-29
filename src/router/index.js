@@ -4,6 +4,7 @@ import Login from '@/views/login' // 引入登录页面组件
 import Home from '@/views/home' // 引入首页
 import Welcome from '@/views/welcome' // 引入欢迎页面
 import NotFound from '@/views/404' // 引入404页面
+import local from '@/utils/local' // 引入存储自定义模块
 Vue.use(VueRouter) // 全局使用
 const router = new VueRouter({
   // 路由配置对象
@@ -30,4 +31,18 @@ const router = new VueRouter({
     }
   ]
 })
+// 路由导航守卫（前置导航守卫）
+router.beforeEach((to, from, next) => {
+  // to 跳转目标路由对象
+  // from 从哪里跳过来的路由对象
+  // next() 放行  next('/login') 拦截到登录
+  // next()
+  // 如果你访问的不是登录页面，且又没有登录，跳转到登录页面。
+  const user = local.getUser()
+  if (to.path !== '/login' && !user) {
+    return next('/login')
+  }
+  next()
+})
+
 export default router // 导出 需要在main.js导入

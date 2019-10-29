@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import local from '@/utils/local'
 export default {
   data () {
     // 校验手机号函数
@@ -42,7 +43,7 @@ export default {
       }
     }
     return {
-      LoginForm: { mobile: '', code: '' },
+      LoginForm: { mobile: '15966666666', code: '246810' },
       // 登录模块校验的数据
       LoginRules: {
         mobile: [
@@ -61,24 +62,39 @@ export default {
   methods: {
     login () {
       // 对整个表单进行校验
-      this.$refs['loginForm'].validate(valid => {
+      this.$refs['loginForm'].validate(async valid => {
         if (valid) {
           // 校验成功  进行登录（发请求）
           // post(url,参数对象)
           // get(url,{params:参数对象})
-          this.$http({
-            url: 'authorizations',
-            data: this.LoginForm,
-            method: 'post'
-          })
-            .then(res => {
-              // 成功
-              this.$router.push('/')
+          // this.$http({
+          //   url: 'authorizations',
+          //   data: this.LoginForm,
+          //   method: 'post'
+          // })
+          //   .then(res => {
+          //     // 成功
+          //     // 保存用户信息 因为经常用 要封装成工具
+          //     // 成功 res 是响应对象  res.data 是响应主体
+          //     // 保存用户信息（token）
+          //     local.setUser(res.data.data)
+          //     this.$router.push('/') // 并没有刷新页面,是通过路由跳转到首页
+          //   })
+          //   .catch(() => {
+          //     // 失败 提示
+          //     this.$message.error('手机号或验证码格式错误')
+          //   })
+          try {
+            const { data: { data } } = await this.$http({
+              url: 'authorizations',
+              data: this.LoginForm,
+              method: 'post'
             })
-            .catch(() => {
-              // 失败 提示
-              this.$message.error('手机号或验证码格式错误')
-            })
+            local.setUser(data)
+            this.$router.push('/')
+          } catch (e) {
+            this.$message.error('手机号或验证码格式错误')
+          }
         }
       })
     }
@@ -90,7 +106,7 @@ export default {
 .container {
   width: 100%;
   height: 100%;
-  background-color: pink;
+  // background-color: pink;
   //   用定位来摆脱 没有高度的问题
   position: absolute;
   left: 0;
