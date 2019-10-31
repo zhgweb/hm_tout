@@ -7,6 +7,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import router from '@/router'
 // 导入 axios
 import axios from '@/api'
+import myBread from '@/components'
+// Vue.component(myBread.name, myBread)
+Vue.use(myBread)
 // 往vue的原型对象里面加一个$http方法
 // 全局下使用axios
 Vue.prototype.$http = axios
@@ -20,4 +23,4 @@ new Vue({
 }).$mount('#app')
 // main.js的作用
 // 职责1:创建一个根实例
-// 职责2:复杂全局范围的依赖导入
+// 职责2:复则全局范围的依赖导入
