@@ -7,8 +7,17 @@ import 'element-ui/lib/theme-chalk/index.css'
 import router from '@/router'
 // 导入 axios
 import axios from '@/api'
+// 导入提取封装的多用组件
 import myBread from '@/components'
-// Vue.component(myBread.name, myBread)
+import JsonBig from 'json-bigint'
+// `transformResponse` 在传递给 then/catch 前，允许修改响应数据
+axios.defaults.transformResponse = [(data) => {
+  // 对 data 进行任意转换处理
+  // 后台的原始数据   理想情况 json字符串
+  try { return JsonBig.parse(data) } catch (e) {
+    return data
+  }
+}]
 Vue.use(myBread)
 // 往vue的原型对象里面加一个$http方法
 // 全局下使用axios

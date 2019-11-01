@@ -19,14 +19,8 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="频道：">
-          <el-select v-model="reqParams.channel_id" placeholder="请选择" clearable>
-            <el-option
-              v-for="item in channelOptions"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"
-            ></el-option>
-          </el-select>
+       <!-- 使用频道组件 -->
+          <my-channel  v-model="reqParams.channel_id"></my-channel>
         </el-form-item>
         <el-form-item label="日期：">
           <el-date-picker
@@ -72,9 +66,9 @@
         </el-table-column>
         <el-table-column label="发布时间" prop="pubdate"></el-table-column>
         <el-table-column label="操作" width="120">
-          <template>
-            <el-button type="primary" icon="el-icon-edit" circle plain></el-button>
-            <el-button type="danger" icon="el-icon-delete" circle plain></el-button>
+          <template slot-scope="scope">
+            <el-button type="primary" icon="el-icon-edit" circle plain @click="toEdit(scope.row.id)"></el-button>
+            <el-button type="danger" icon="el-icon-delete" circle plain @click='delArticle(scope.row.id)'></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -118,18 +112,9 @@ export default {
     }
   },
   created () {
-    this.getChannelOptions()
     this.getArticles()
   },
   methods: {
-    async getChannelOptions () {
-      // 获取数据
-      const {
-        data: { data }
-      } = await this.$http.get('channels')
-      // 赋值 channelOptions
-      this.channelOptions = data.channels
-    },
     // 获取文章列表数据
     async getArticles () {
       // 获取数据
@@ -148,7 +133,7 @@ export default {
       this.getArticles()
     },
     // 选择日期
-    change (dateArr) {
+    changeDate (dateArr) {
       // dateArr 是数组 [date,date]  起始时间  结束时间
       // 我们需要： dateArr 是数组 [string,string]  string === '2019-10-02'
       // value-form="yyyy-MM-dd" 格式转换成功
@@ -172,6 +157,21 @@ export default {
       // 把页码换成1
       this.reqParams.page = 1
       // 重新获取数据
+      this.getArticles()
+    },
+    // 去编辑页面
+    toEdit (id) {
+      // this.$router.push(`@/publish?id=${id}`)
+      // 第二种  query传参方式
+      this.$router.push({ path: '/publish', query: { id } })
+    },
+    // 删除
+    async delArticle (id) {
+      // 发请求  restfull 接口规则（get post put patch delete）
+      await this.$http.delete(`/articles/${id}`)
+      // 提示
+      this.$message.success('删除成功')
+      // 更新列表 重新获取数据
       this.getArticles()
     }
   }
