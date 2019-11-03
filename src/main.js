@@ -10,6 +10,7 @@ import axios from '@/api'
 // 导入提取封装的多用组件
 import myBread from '@/components'
 import JsonBig from 'json-bigint'
+import '@/styles/index.less' // 引入全局css样式
 // `transformResponse` 在传递给 then/catch 前，允许修改响应数据
 axios.defaults.transformResponse = [(data) => {
   // 对 data 进行任意转换处理

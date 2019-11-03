@@ -6,6 +6,8 @@ import Welcome from '@/views/welcome' // 引入欢迎页面
 import NotFound from '@/views/404' // 引入404页面
 import local from '@/utils/local' // 引入存储自定义模块
 import Article from '@/views/article' // 引入内容模块
+import Image from '@/views/image' // 引入素材模块
+
 Vue.use(VueRouter) // 全局使用
 const router = new VueRouter({
   // 路由配置对象
@@ -25,8 +27,14 @@ const router = new VueRouter({
         path: '/',
         component: Welcome
       },
-      { path: '/article',
-        component: Article }]
+      {
+        path: '/article',
+        component: Article
+      },
+      {
+        path: '/image',
+        component: Image
+      }]
     },
     {
       path: '*',
