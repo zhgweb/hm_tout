@@ -7,6 +7,7 @@ import NotFound from '@/views/404' // 引入404页面
 import local from '@/utils/local' // 引入存储自定义模块
 import Article from '@/views/article' // 引入内容模块
 import Image from '@/views/image' // 引入素材模块
+import Publish from '@/views/publish' // 引入发布模块
 
 Vue.use(VueRouter) // 全局使用
 const router = new VueRouter({
@@ -34,6 +35,10 @@ const router = new VueRouter({
       {
         path: '/image',
         component: Image
+      },
+      {
+        path: '/publish',
+        component: Publish
       }]
     },
     {

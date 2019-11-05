@@ -30,7 +30,6 @@
       </div>
       <!-- 分页按钮 -->
       <el-pagination
-        style="margin: 0px auto"
         background
         layout="prev, pager, next"
         :page-size="reqParams.per_page"
@@ -67,7 +66,7 @@ export default {
     return {
       reqParams: {
         collect: false,
-        per_page: 10,
+        per_page: 14,
         page: 1
       },
       // 素材列表
@@ -162,11 +161,6 @@ export default {
           // 点击了取消
         })
     }
-
-    // 添加素材
-    // async addImgs () {
-    //   dialogVisible:false
-    // }
   }
 }
 </script>
@@ -175,12 +169,12 @@ export default {
 .lists {
   margin-top: 20px;
   .before_imgs {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     border: 1px dashed #ddd;
     position: relative;
     display: inline-block;
-    margin-right: 100px;
+    margin-right: 50px;
     margin-bottom: 20px;
     img {
       width: 100%;
