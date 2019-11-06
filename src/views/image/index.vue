@@ -44,6 +44,7 @@
       <!-- action 是图片上传的接口地址 -->
       <!-- headers 是上传组件的请求头 -->
       <!-- name 提交文件上传的字段 需要和后台接口一致 -->
+      <!-- 上传组件 -->
       <el-upload
         name="image"
         :headers="headers"
@@ -200,5 +201,9 @@ export default {
       }
     }
   }
+}
+// 对话框的下间隙
+.avatar-uploader {
+  padding-bottom: 40px;
 }
 </style>

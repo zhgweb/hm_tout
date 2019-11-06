@@ -28,7 +28,7 @@
   padding: 0;
 }
 .el-dialog__body {
-  padding-bottom: 0;
+  padding-bottom: 0px;
 }
 .el-pagination {
   text-align: center;

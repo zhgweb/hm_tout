@@ -9,6 +9,7 @@ import Article from '@/views/article' // 引入内容模块
 import Image from '@/views/image' // 引入素材模块
 import Publish from '@/views/publish' // 引入发布模块
 import Comment from '@/views/comment' // 引入发布模块
+import Setting from '@/views/setting' // 引入发布模块
 
 Vue.use(VueRouter) // 全局使用
 const router = new VueRouter({
@@ -44,6 +45,10 @@ const router = new VueRouter({
       {
         path: '/comment',
         component: Comment
+      },
+      {
+        path: '/setting',
+        component: Setting
       }]
     },
     {
