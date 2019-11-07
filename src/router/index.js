@@ -10,6 +10,7 @@ import Image from '@/views/image' // 引入素材模块
 import Publish from '@/views/publish' // 引入发布模块
 import Comment from '@/views/comment' // 引入发布模块
 import Setting from '@/views/setting' // 引入发布模块
+import Fans from '@/views/fans' // 引入粉丝模块
 
 Vue.use(VueRouter) // 全局使用
 const router = new VueRouter({
@@ -49,7 +50,12 @@ const router = new VueRouter({
       {
         path: '/setting',
         component: Setting
-      }]
+      },
+      {
+        path: '/fans',
+        component: Fans
+      }
+      ]
     },
     {
       path: '*',
